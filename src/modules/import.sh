@@ -9,7 +9,7 @@ IMPORT_FILE="$IMPORT_DIR/mac_settings.tar.gz"
 
 import_settings() {
     ensure_directory "$IMPORT_DIR"
-    
+
     # Handle gist import
     if [[ "${1:-}" =~ ^[a-f0-9]+$ ]]; then
         log_info "Fetching settings from gist..."
@@ -59,6 +59,9 @@ import_macos_settings() {
 }
 
 main() {
+    # WIP: Confirm before proceeding
+    confirm_action "import"
+
     import_settings "$@"
     import_macos_settings
 }

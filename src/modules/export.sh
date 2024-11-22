@@ -46,6 +46,9 @@ export_macos_settings() {
 }
 
 main() {
+    # WIP: Confirm before proceeding
+    confirm_action "exporting settings"
+
     export_settings "$@"
     export_macos_settings
 }

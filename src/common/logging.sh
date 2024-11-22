@@ -20,6 +20,17 @@ log_debug() {
     fi
 }
 
+confirm_action() {
+    local action="$1"
+    echo -e "${YELLOW}[Warning]:${NC} 🚧 WIP: The '$action' action is not tested yet 🚧, do you want to continue? (y/n): "
+    read -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        log_warning "Action cancelled by user"
+        exit 1
+    fi
+}
+
 # Function to set log level
 set_log_level() {
     LOG_LEVEL="$1"
