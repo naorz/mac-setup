@@ -1,0 +1,174 @@
+{
+  "ides": {
+    "vscode": {
+      "name": "Visual Studio Code",
+      "desc": "VScode IDE by Microsoft",
+      "brew": "visual-studio-code",
+      "type": "cask",
+      "app_name": "Visual Studio Code",
+      "requires_ui": true,
+      "ui_message": "Please complete VSCode setup and sign in if needed"
+    },
+    "webstorm": {
+      "name": "WebStorm",
+      "desc": "JavaScript IDE by JetBrains",
+      "brew": "webstorm",
+      "type": "cask",
+      "app_name": "WebStorm",
+      "requires_ui": true,
+      "ui_message": "Please complete WebStorm setup and activate license"
+    },
+    "rider": {
+      "name": "Rider",
+      "desc": ".NET IDE by JetBrains",
+      "brew": "rider",
+      "type": "cask",
+      "app_name": "Rider",
+      "requires_ui": true
+    }
+  },
+  "languages": {
+    "node": {
+      "name": "Node.js Environment",
+      "desc": "JavaScript runtime with nvm",
+      "deps": ["nvm"],
+      "post_install": [
+        "source ~/.nvm/nvm.sh",
+        "nvm install --lts",
+        "nvm use --lts"
+      ]
+    },
+    "golang": {
+      "name": "Go Language",
+      "desc": "Go programming language",
+      "brew": "go",
+      "post_install": [
+        "mkdir -p $HOME/go/{bin,src,pkg}"
+      ]
+    },
+    "rust": {
+      "name": "Rust Language",
+      "desc": "Systems programming language",
+      "cmd": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+    },
+    "python": {
+      "name": "Python Environment",
+      "desc": "Python with poetry and venv",
+      "brew": ["python3", "poetry"],
+      "post_install": [
+        "python3 -m pip install --user virtualenv"
+      ]
+    }
+  },
+  "vm": {
+    "docker-desktop": {
+      "name": "Docker",
+      "desc": "Docker Desktop",
+      "brew": "docker",
+      "type": "cask",
+      "app_name": "Docker",
+      "requires_ui": true
+    },
+    "docker-cli": {
+      "name": "Docker CLI",
+      "desc": "Docker command line interface",
+      "brew": "docker"
+    },
+    "docker-compose": {
+      "name": "Docker Compose",
+      "desc": "Define and run multi-container applications",
+      "brew": "docker-compose"
+    },
+    "minikube": {
+      "name": "Minikube",
+      "desc": "Local Kubernetes cluster",
+      "brew": ["minikube", "kubernetes-cli"],
+      "post_install": [
+        "minikube addons enable dashboard"
+      ]
+    }
+  },
+  "cli": {
+    "zsh": {
+      "name": "Zsh Shell",
+      "desc": "Extended Bourne shell",
+      "brew": "zsh",
+      "post_install": [
+        "sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+      ]
+    },
+    "jq": {
+      "name": "jq",
+      "desc": "Command-line JSON processor",
+      "brew": "jq"
+    },
+    "wget": {
+      "name": "wget",
+      "desc": "Internet file retriever",
+      "brew": "wget"
+    },
+    "git": {
+      "name": "Git",
+      "desc": "Version control system",
+      "brew": "git"
+    }
+  },
+  "apps": {
+    "rectangle": {
+      "name": "Rectangle",
+      "desc": "Window management tool",
+      "brew": "rectangle",
+      "type": "cask",
+      "app_name": "Rectangle"
+    },
+    "displaylink": {
+      "name": "DisplayLink",
+      "desc": "Multi-display driver",
+      "brew": "displaylink",
+      "type": "cask",
+      "app_name": "DisplayLink Manager"
+    },
+    "maccy": {
+      "name": "Maccy",
+      "desc": "Clipboard manager",
+      "brew": "maccy",
+      "type": "cask",
+      "app_name": "Maccy"
+    },
+    "iterm2": {
+      "name": "iTerm2",
+      "desc": "Enhanced terminal emulator",
+      "brew": "iterm2",
+      "type": "cask",
+      "app_name": "iTerm"
+    },
+    "dbeaver": {
+      "name": "DBeaver",
+      "desc": "Universal database tool",
+      "brew": "dbeaver-community",
+      "type": "cask",
+      "app_name": "DBeaver Community Edition"
+    },
+    "excalidraw": {
+      "name": "Excalidraw",
+      "desc": "Virtual whiteboard",
+      "brew": "excalidraw",
+      "type": "cask",
+      "app_name": "Excalidraw"
+    },
+    "chrome": {
+      "name": "Google Chrome",
+      "desc": "Web browser",
+      "brew": "google-chrome",
+      "type": "cask",
+      "app_name": "Google Chrome"
+    },
+    "caffeine": {
+      "name": "Caffeine",
+      "desc": "Prevent Mac from sleeping",
+      "brew": "caffeine",
+      "type": "cask",
+      "app_name": "Caffeine"
+    }
+  }
+}
