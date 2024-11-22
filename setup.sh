@@ -26,6 +26,7 @@ show_help() {
     echo "  install    - Install selected tools"
     echo "  export     - Export settings"
     echo "  import     - Import settings"
+    echo "  tools      - List available tools"
     echo "  help       - Show this help message"
 }
 
@@ -38,7 +39,7 @@ if [ "$#" -eq 0 ]; then
 fi
 
 case "${1:-help}" in
-    "select"|"install"|"export"|"import")
+    "select"|"install"|"export"|"import"|"tools")
         "$SCRIPT_DIR/src/modules/$1.sh" "${@:2}"
         ;;
     "help")
