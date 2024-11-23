@@ -17,7 +17,7 @@ Automate the setup of your a new Mac for development environments.
 
 ## Quick Start
 ```bash
-curl -sSL https://raw.githubusercontent.com/naorz/mac-setup/main/setup.sh select | bash
+curl -sSL https://raw.githubusercontent.com/naorz/mac-setup/main/start.sh | bash -s select
 ```
 
 ## Declaimer

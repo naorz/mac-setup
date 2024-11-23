@@ -8,9 +8,10 @@ INSTALL_STATE="${STATE_DIR}/install_state.json"
 TOOL_STATE="${STATE_DIR}/tool_state.json"
 
 init_state() {
-    ensure_directory "$STATE_DIR"
-    [ ! -f "$INSTALL_STATE" ] && echo "{}" > "$INSTALL_STATE"
-    [ ! -f "$TOOL_STATE" ] && echo "{}" > "$TOOL_STATE"
+  ensure_permissions
+  ensure_directory "$STATE_DIR"
+  [ ! -f "$INSTALL_STATE" ] && echo "{}" > "$INSTALL_STATE"
+  [ ! -f "$TOOL_STATE" ] && echo "{}" > "$TOOL_STATE"
 }
 
 set_install_state() {

@@ -6,8 +6,28 @@ source "$SCRIPT_DIR/src/common/logging.sh"
 TRACKER_FILE="$SCRIPT_DIR/src/state/installation_progress.json"
 INSTALLATION_STATUS_FILE="$STATE_DIR/installation_status.json"
 
+# Add permission constants
+PERMISSION_R="644"
+PERMISSION_RW="666"
+PERMISSION_X="755"
+PERMISSION_RWX="777"
+
+# New function to ensure file permissions
+ensure_file_permissions() {
+    local file="$1"
+    local perms="${2:-$PERMISSION_RW}"  # Default to read-write
+
+    if [ -f "$file" ]; then
+        chmod "$perms" "$file"
+    fi
+
+    # Ensure parent directory is accessible
+    chmod "$PERMISSION_RWX" "$(dirname "$file")"
+}
+
 init_tracker() {
     echo "{}" > "$TRACKER_FILE"
+    ensure_file_permissions "$TRACKER_FILE"
 }
 
 update_progress() {
@@ -15,13 +35,18 @@ update_progress() {
     local status="$2"
     local message="${3:-}"
 
+    ensure_file_permissions "$TRACKER_FILE"
+
     jq --arg t "$tool" \
        --arg s "$status" \
        --arg m "$message" \
        --arg ts "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
        '.[$t] = {"status": $s, "message": $m, "timestamp": $ts}' \
        "$TRACKER_FILE" > "${TRACKER_FILE}.tmp"
+
+    ensure_file_permissions "${TRACKER_FILE}.tmp"
     mv "${TRACKER_FILE}.tmp" "$TRACKER_FILE"
+    ensure_file_permissions "$TRACKER_FILE"
 }
 
 get_progress() {
@@ -36,7 +61,9 @@ is_completed() {
 }
 
 track_installation() {
-    echo "$1 installed" >> "$SCRIPT_DIR/src/state/installations.log"
+    local log_file="$SCRIPT_DIR/src/state/installations.log"
+    echo "$1 installed" >> "$log_file"
+    ensure_file_permissions "$log_file"
 }
 
 is_installed() {
@@ -54,8 +81,10 @@ show_progress() {
 # Initialize installation status file if it doesn't exist
 init_installation_status() {
     if [ ! -f "$INSTALLATION_STATUS_FILE" ]; then
+        mkdir -p "$(dirname "$INSTALLATION_STATUS_FILE")"
         echo "{}" > "$INSTALLATION_STATUS_FILE"
     fi
+    ensure_file_permissions "$INSTALLATION_STATUS_FILE"
 }
 
 # Check if a tool is installed using its check command or default command check
@@ -91,12 +120,17 @@ update_tool_status() {
         init_installation_status
     fi
 
+    ensure_file_permissions "$INSTALLATION_STATUS_FILE"
+
     jq --arg t "$tool" \
        --arg s "$status" \
        --arg ts "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
        '.[$t] = {"status": $s, "timestamp": $ts}' \
        "$INSTALLATION_STATUS_FILE" > "${INSTALLATION_STATUS_FILE}.tmp"
+
+    ensure_file_permissions "${INSTALLATION_STATUS_FILE}.tmp"
     mv "${INSTALLATION_STATUS_FILE}.tmp" "$INSTALLATION_STATUS_FILE"
+    ensure_file_permissions "$INSTALLATION_STATUS_FILE"
 }
 
 # Add helper function to check brew installations
