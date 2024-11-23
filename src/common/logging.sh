@@ -34,7 +34,7 @@ log_error() {
 
 confirm_action() {
   local action="$1"
-  echo -e "${LOGGING_ACTION_COLOR}[Action required]${NC}${CYAN}Do you want to proceed with ${action}? (y/n): ${NC}"
+  echo -e "${LOGGING_ACTION_COLOR}[Action required]${NC} ${CYAN}Do you want to proceed with the ${action}? (y/n): ${NC}"
   read -n 1 -r
   echo
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then

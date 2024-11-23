@@ -142,7 +142,7 @@
       "desc": "Video conferencing tool",
       "brew": "zoom",
       "type": "cask",
-      "app_name": "Zoom"
+      "app_name": "zoom.us"
     },
     "whatsapp": {
       "name": "WhatsApp",
@@ -221,7 +221,7 @@
       "desc": "Universal database tool",
       "brew": "dbeaver-community",
       "type": "cask",
-      "app_name": "DBeaver Community Edition"
+      "app_name": "DBeaver"
     },
     "excalidraw": {
       "name": "Excalidraw",

@@ -14,7 +14,7 @@ update_progress() {
     local tool="$1"
     local status="$2"
     local message="${3:-}"
-    
+
     jq --arg t "$tool" \
        --arg s "$status" \
        --arg m "$message" \
@@ -62,7 +62,7 @@ init_installation_status() {
 check_tool_installed() {
     local tool="$1"
     local check_cmd=$(jq -r --arg t "$tool" '.. | select(.[$t]?) | .[$t].check_cmd // ""' "$SCRIPT_DIR/src/config/tools.json")
-    
+
     if [ -n "$check_cmd" ]; then
         eval "$check_cmd" >/dev/null 2>&1
         return $?
@@ -86,11 +86,11 @@ get_tool_status() {
 update_tool_status() {
     local tool="$1"
     local status="$2"
-    
+
     if [ ! -f "$INSTALLATION_STATUS_FILE" ]; then
         init_installation_status
     fi
-    
+
     jq --arg t "$tool" \
        --arg s "$status" \
        --arg ts "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
@@ -110,7 +110,7 @@ check_brew_installation() {
 check_mac_app() {
     local app_name="$1"
     local app_name_lower=$(echo "$app_name" | tr '[:upper:]' '[:lower:]')
-    
+
     # Get all .app directories and check case-insensitively
     local found=false
     for dir in "/Applications" "$HOME/Applications"; do
@@ -124,7 +124,7 @@ check_mac_app() {
             done < <(find "$dir" -maxdepth 1 -name "*.app")
         fi
     done
-    
+
     $found
 }
 
@@ -134,7 +134,7 @@ check_tool_installation() {
     local brew_name=$(echo "$tool_info" | jq -r '.brew // empty')
     local install_type=$(echo "$tool_info" | jq -r '.type // "formula"')
     local app_name=$(echo "$tool_info" | jq -r '.app_name // empty')
-    
+
     # 1. Check brew installation first (preferred method)
     if [ -n "$brew_name" ]; then
         if [ "$install_type" = "cask" ]; then
@@ -156,19 +156,19 @@ check_tool_installation() {
 }
 
 scan_installed_tools() {
-    log_info "Scanning system for installed tools..."
+    log_info "Scanning system for installed tools (it can take a while - 40sm~)..."
     init_installation_status
-    
+
     local tool_count=0
     local installed_count=0
     declare -a installed_tools=()
     declare -a not_installed_tools=()
-    
+
     while IFS= read -r tool; do
         ((tool_count++))
         local name=$(jq -r --arg t "$tool" '.. | select(.[$t]?) | .[$t].name' "$TOOLS_JSON")
         local install_type=$(jq -r --arg t "$tool" '.. | select(.[$t]?) | .[$t].type // "formula"' "$TOOLS_JSON")
-        
+
         log_debug "Checking $name..."
         if check_tool_installation "$tool"; then
             ((installed_count++))
@@ -179,22 +179,22 @@ scan_installed_tools() {
             not_installed_tools+=("$name ($tool)")
         fi
     done < <(jq -r 'paths | select(length==2) | .[1]' "$TOOLS_JSON")
-    
+
     # Print summary
     log_info "Installation scan complete:"
     log_info "Found $installed_count of $tool_count tools installed\n"
-    
+
     if [ ${#installed_tools[@]} -gt 0 ]; then
         log_info "Installed tools:"
         printf '%s\n' "${installed_tools[@]}" | sort | sed 's/^/  ✓ /'
     fi
-    
+
     if [ ${#not_installed_tools[@]} -gt 0 ]; then
         echo ""
         log_info "Not installed tools:"
         printf '%s\n' "${not_installed_tools[@]}" | sort | sed 's/^/  ✗ /'
     fi
-    
+
     echo ""
 }
 

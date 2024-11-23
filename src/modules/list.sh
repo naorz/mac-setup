@@ -16,7 +16,7 @@ fi
 print_tool_list() {
   local current_category=""
 
-  log_info "Available tool list:"
+  log_info "Supported tools to install via mac-setup script:"
   echo ""
 
   # Create a temporary file for storing the formatted output
