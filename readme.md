@@ -10,7 +10,9 @@ Automate the setup of your a new Mac for development environments.
     - [Features](#features)
     - [Usage](#usage)
     - [Supported Tools](#supported-tools)
+  - [Demo](#demo)
   - [Structure](#structure)
+  - [License](#license)
 
 
 ## Quick Start
@@ -21,7 +23,7 @@ curl -sSL https://raw.githubusercontent.com/naorz/mac-setup/main/setup.sh select
 ## Declaimer
 > 🚧 Currently under development, use at your own risk.  
 
-Already tested:  
+Verified modules:  
 - [x] select
 - [x] tools
 - [x] help
@@ -37,12 +39,13 @@ Already tested:
 - ☁️ Settings sync via GitHub Gists
 
 ### Usage
-1. Select tools: macsetup select
-2. Install tools: macsetup install
-3. Export (macOS preferences) settings: macsetup export [--gist]
-4. Import (macOS preferences) settings: macsetup import [gist-id|file]
-5. Print available tools: macsetup tools
-6. Help: macsetup help
+1. Select tools: ./start.sh select
+2. Install tools: ./start.sh install
+3. Print available tools: ./start.sh tools
+4. Help: ./start.sh help
+5. Not tested yet:
+   1. Export (macOS preferences) settings: ./start.sh export [--gist]
+   2. Import (macOS preferences) settings: ./start.sh import [gist-id|file]
 
 ### Supported Tools
 - IDEs: Visual Studio Code, WebStorm, Rider
@@ -51,11 +54,20 @@ Already tested:
 - CLI: zsh, jq, wget, git
 - MacOS misc apps: Rectangle, DisplayLink, Maccy, iTerm2, Slack, Zoom, Postman, Alfred, 1Password, Spotify, Notion, Firefox, Chrome, Brave
 
+## Demo
+
+![Menu](./demo/menu.png)
+![Tool List](./demo/tool-list.png)
+![Installation Tracker](./demo/installation_tracker.png)
+![Tool Selection](./demo/tool-selection.png)
+
+
 ## Structure
 ```
-new-setup/
+mac-setup/
 ├── setup.sh
 ├── README.md
+├── script.json
 └── src/
     ├── common/
     │   ├── colors.sh
@@ -70,8 +82,12 @@ new-setup/
     │   ├── install.sh
     │   ├── export.sh
     │   ├── import.sh
+    |   ├── tools.sh
     │   └── help.sh
     ├── config/
     │   └── tools.json
     └── state/
 ```
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
