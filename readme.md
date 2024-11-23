@@ -1,6 +1,6 @@
 # Dev Tools Installer
 
-> Automate the setup of your a new Mac for development environments.
+Automate the setup of your a new Mac for development environments.
 
 ## table of contents
 - [Dev Tools Installer](#dev-tools-installer)
@@ -15,26 +15,26 @@
 
 ## Quick Install
 ```bash
-curl -sSL https://raw.githubusercontent.com/naorz/mac-setup/main/setup.sh | bash
+curl -sSL https://raw.githubusercontent.com/naorz/mac-setup/main/setup.sh select | bash
 ```
 
 ## Declaimer
 > 🚧 Currently under development, use at your own risk.  
 
 Already tested:  
-[*] select
-[*] tools
-[*] help
-[] install
-[] export
-[] import
+- [x] select
+- [x] tools
+- [x] help
+- [ ] install
+- [ ] export
+- [ ] import
 
 ### Features
-- 🔄 Export/Import system settings
-- 🛠 Development tools installation
 - 📦 Package management via Homebrew
-- ☁️ Settings sync via GitHub Gists
+- 🛠 Development tools installation
+- 🚧 🔄 Export/Import macos system settings
 - ⚡️ Resume interrupted installations
+- ☁️ Settings sync via GitHub Gists
 
 ### Usage
 1. Select tools: macsetup select
