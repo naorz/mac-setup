@@ -27,13 +27,13 @@ show_selection_menu() {
     local tools=$(get_tool_list)
     local current_category=""
     local options=()
-    
+
     while IFS=$'\t' read -r category tool name desc; do
         if [ "$category" != "$current_category" ]; then
             current_category="$category"
             options+=("---${category}---" "=== ${category^} ===" "off")
         fi
-        
+
         local status=$(get_tool_status "$tool")
         if [ "$status" = "installed" ]; then
             options+=("$tool" "[✓ Installed] - $desc" "off")
@@ -63,14 +63,15 @@ check_existing_status() {
         if [ "$count" -gt 0 ]; then
             log_info "Found existing installation status with $count tools."
             log_info "Last updated: $(jq -r 'to_entries[0].value.timestamp' "$INSTALLATION_STATUS_FILE")"
-            
+
             while true; do
-                read -p "Do you want to rescan installed tools? (y/n): " yn
+                echo -e "${CYAN}Do you want to rescan installed tools? (y/n): ${NC}"
+                read -p "" yn
                 case $yn in
-                    [Yy]* ) 
+                    [Yy]* )
                         log_info "Rescanning system..."
                         return 1;;
-                    [Nn]* ) 
+                    [Nn]* )
                         log_info "Using existing installation status..."
                         return 0;;
                     * ) echo "Please answer yes or no.";;
@@ -84,17 +85,17 @@ check_existing_status() {
 main() {
     log_info "Starting tool selection process..."
     init_state
-    
+
     log_info "Preparing selection menu..."
     check_and_install_dependencies "dialog" "jq"
-    
+
     # Check existing installation status
     if ! check_existing_status; then
         scan_installed_tools
         log_info "Press any key to continue..."
         read -n 1 -s
     fi
-    
+
     show_selection_menu
 
     # Check if selection file exists and is not empty
@@ -105,7 +106,7 @@ main() {
 
     # Remove quotes and create proper JSON array
     local selected_tools=$(cat "$SELECTED_FILE" | tr -d '"' | tr ' ' '\n' | grep -v '^$' | grep -v '^---.*---$')
-    
+
     # Remove "finish" if present
     selected_tools=$(echo "$selected_tools" | grep -v "finish")
 
@@ -116,8 +117,10 @@ main() {
 
     # Create JSON array from selected tools
     echo "$selected_tools" | jq -R . | jq -s . > "$STATE_DIR/selected_tools.json"
-    
+
     log_success "Tools selected successfully"
+    log_info "Selected tools are saved at $STATE_DIR/selected_tools.json"
+    log_info "Run 'install' command to install the selected tools"
     exit 0
 }
 

@@ -27,7 +27,7 @@ check_xcode_cli() {
 check_and_install_dependencies() {
     local deps=("$@")
     
-    log_info "Checking required dependencies..."
+    log_debug "Checking required dependencies..."
 
     # Check xcode-select first
     check_xcode_cli
@@ -48,5 +48,5 @@ check_and_install_dependencies() {
         fi
     done
 
-    log_info "All dependencies are ready"
+    log_debug "All dependencies are ready"
 }

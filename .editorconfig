@@ -14,7 +14,7 @@ trim_trailing_whitespace = true
 spaces_around_brackets = inside
 indent_brace_style = K&R
 
-[*.{js,jsx,vue}]
+[*.{js,jsx,ts,tsx}]
 quote_type = single
 
 [*.md]

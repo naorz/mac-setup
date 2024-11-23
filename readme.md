@@ -5,7 +5,7 @@ Automate the setup of your a new Mac for development environments.
 ## table of contents
 - [Dev Tools Installer](#dev-tools-installer)
   - [table of contents](#table-of-contents)
-  - [Quick Install](#quick-install)
+  - [Quick Start](#quick-start)
   - [Declaimer](#declaimer)
     - [Features](#features)
     - [Usage](#usage)
@@ -13,7 +13,7 @@ Automate the setup of your a new Mac for development environments.
   - [Structure](#structure)
 
 
-## Quick Install
+## Quick Start
 ```bash
 curl -sSL https://raw.githubusercontent.com/naorz/mac-setup/main/setup.sh select | bash
 ```
@@ -25,9 +25,9 @@ Already tested:
 - [x] select
 - [x] tools
 - [x] help
-- [ ] install
-- [ ] export
-- [ ] import
+- [x] install
+- [ ] export 🚧
+- [ ] import 🚧
 
 ### Features
 - 📦 Package management via Homebrew

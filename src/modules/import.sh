@@ -20,31 +20,31 @@ import_settings() {
         log_error "No valid import source provided"
         exit 1
     fi
-    
+
     log_info "Importing Mac settings..."
-    
+
     # Extract archive
     tar -xzf "$IMPORT_FILE" -C "$IMPORT_DIR"
-    
+
     # Import system preferences
     [ -f "$IMPORT_DIR/system_prefs.json" ] && {
         while IFS= read -r pref; do
             defaults write $(echo "$pref" | cut -d' ' -f1-3)
         done < "$IMPORT_DIR/system_prefs.json"
     }
-    
+
     # Import dev configs
     [ -f "$IMPORT_DIR/.gitconfig" ] && cp "$IMPORT_DIR/.gitconfig" "$HOME/"
     [ -f "$IMPORT_DIR/.zshrc" ] && cp "$IMPORT_DIR/.zshrc" "$HOME/"
     [ -d "$IMPORT_DIR/.config" ] && cp -r "$IMPORT_DIR/.config" "$HOME/"
-    
+
     # Import VSCode settings
     local vscode_dir="$HOME/Library/Application Support/Code/User"
     if [ -d "$IMPORT_DIR/vscode" ]; then
         mkdir -p "$vscode_dir"
         cp "$IMPORT_DIR/vscode/"* "$vscode_dir/" 2>/dev/null || true
     fi
-    
+
     log_success "Settings imported successfully"
 }
 
@@ -60,7 +60,7 @@ import_macos_settings() {
 
 main() {
     # WIP: Confirm before proceeding
-    confirm_action "import"
+    confirm_wip_action "import"
 
     import_settings "$@"
     import_macos_settings
