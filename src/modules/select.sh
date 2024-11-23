@@ -66,7 +66,7 @@ check_existing_status() {
 
             while true; do
                 echo -e "${CYAN}Do you want to rescan installed tools? (y/n): ${NC}"
-                read -p "" yn
+                read -n 1 yn
                 case $yn in
                     [Yy]* )
                         log_info "Rescanning system..."

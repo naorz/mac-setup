@@ -113,7 +113,81 @@
       "brew": "git"
     }
   },
+  "browsers": {
+    "chrome": {
+      "name": "Google Chrome",
+      "desc": "Web browser",
+      "brew": "google-chrome",
+      "type": "cask",
+      "app_name": "Google Chrome"
+    },
+    "firefox": {
+      "name": "Mozilla Firefox",
+      "desc": "Web browser",
+      "brew": "firefox",
+      "type": "cask",
+      "app_name": "Firefox"
+    }
+  },
+  "communications": {
+    "slack": {
+      "name": "Slack",
+      "desc": "Team communication tool",
+      "brew": "slack",
+      "type": "cask",
+      "app_name": "Slack"
+    },
+    "zoom": {
+      "name": "Zoom",
+      "desc": "Video conferencing tool",
+      "brew": "zoom",
+      "type": "cask",
+      "app_name": "Zoom"
+    },
+    "whatsapp": {
+      "name": "WhatsApp",
+      "desc": "Messaging app",
+      "brew": "whatsapp",
+      "type": "cask",
+      "app_name": "WhatsApp"
+    },
+    "discord": {
+      "name": "Discord",
+      "desc": "Voice, video and text chat",
+      "brew": "discord",
+      "type": "cask",
+      "app_name": "Discord"
+    },
+    "telegram": {
+      "name": "Telegram",
+      "desc": "Messaging app",
+      "brew": "telegram",
+      "type": "cask",
+      "app_name": "Telegram"
+    },
+    "microsoft-teams": {
+      "name": "Microsoft Teams",
+      "desc": "Team collaboration tool",
+      "brew": "microsoft-teams",
+      "type": "cask",
+      "app_name": "Microsoft Teams"
+    }
+  },
   "apps": {
+    "postman": {
+      "name": "Postman",
+      "desc": "API development tool",
+      "brew": "postman",
+      "type": "cask",
+      "app_name": "Postman"
+    },
+    "spotify": {
+      "name": "Spotify",
+      "desc": "Music streaming service",
+      "brew": "spotify",
+      "type": "cask",
+      "app_name": "Spotify"
+    },
     "rectangle": {
       "name": "Rectangle",
       "desc": "Window management tool",
@@ -152,16 +226,9 @@
     "excalidraw": {
       "name": "Excalidraw",
       "desc": "Virtual whiteboard",
-      "brew": "excalidraw",
+      "brew": "excalidrawz",
       "type": "cask",
       "app_name": "Excalidraw"
-    },
-    "chrome": {
-      "name": "Google Chrome",
-      "desc": "Web browser",
-      "brew": "google-chrome",
-      "type": "cask",
-      "app_name": "Google Chrome"
     },
     "caffeine": {
       "name": "Caffeine",
@@ -169,6 +236,13 @@
       "brew": "caffeine",
       "type": "cask",
       "app_name": "Caffeine"
+    },
+    "alfred": {
+      "name": "Alfred",
+      "desc": "Productivity app",
+      "brew": "alfred",
+      "type": "cask",
+      "app_name": "Alfred"
     }
   }
 }
